@@ -1,12 +1,14 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from typing import Optional
+from fastapi.security import OAuth2PasswordBearer
 from consultas import Estudiante
 
 app = FastAPI()
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 #Peticiones a estudiantes
 @app.get("/estudiante/{correo}")
-def consulta_estudiante(correo: str):
+def consulta_estudiante(correo: str, token: str = Depends(oauth2_scheme)):
     consulta = Estudiante()
     return {"tipo": "peticion get", "correo": correo, "cursos": consulta.consultar_evaluaciones()}
 
