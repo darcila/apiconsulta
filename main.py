@@ -23,7 +23,6 @@ def read_root():
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
 
-
-@app.get("/test")
-def read_root():
-    return {"nombre": "prueba"}
+@app.get("/prueba")
+def peticion_prueba():
+    return {"nombre": "prueba", "clave1": "valor1"}
